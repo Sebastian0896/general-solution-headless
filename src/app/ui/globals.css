@@ -1,0 +1,134 @@
+/* app/globals.css */
+@import 'tailwindcss';
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply text-gray-800 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors;
+  }
+}
+
+/* Estilos para el contenido de WordPress */
+.prose {
+  color: theme('colors.gray.700');
+  max-width: none;
+}
+
+.prose h2 {
+  font-size: theme('fontSize.2xl');
+  font-weight: theme('fontWeight.bold');
+  margin-top: theme('spacing.8');
+  margin-bottom: theme('spacing.4');
+  color: theme('colors.gray.900');
+}
+
+.prose h3 {
+  font-size: theme('fontSize.xl');
+  font-weight: theme('fontWeight.semibold');
+  margin-top: theme('spacing.6');
+  margin-bottom: theme('spacing.3');
+  color: theme('colors.gray.900');
+}
+
+.prose p {
+  margin-bottom: theme('spacing.4');
+  line-height: theme('lineHeight.relaxed');
+}
+
+.prose a {
+  color: theme('colors.blue.600');
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: theme('colors.blue.800');
+}
+
+.prose ul, .prose ol {
+  margin-bottom: theme('spacing.4');
+  padding-left: theme('spacing.6');
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose li {
+  margin-bottom: theme('spacing.2');
+}
+
+.prose blockquote {
+  border-left: 4px solid theme('colors.gray.300');
+  padding-left: theme('spacing.4');
+  font-style: italic;
+  color: theme('colors.gray.600');
+  margin: theme('spacing.6') 0;
+}
+
+.prose img {
+  border-radius: theme('borderRadius.lg');
+  margin: theme('spacing.6') 0;
+}
+
+.prose table {
+  width: 100%;
+  margin: theme('spacing.6') 0;
+  border-collapse: collapse;
+}
+
+.prose th, .prose td {
+  padding: theme('spacing.2') theme('spacing.4');
+  border: 1px solid theme('colors.gray.300');
+}
+
+.prose th {
+  background-color: theme('colors.gray.100');
+  font-weight: theme('fontWeight.semibold');
+}
+
+.prose pre {
+  background-color: theme('colors.gray.100');
+  padding: theme('spacing.4');
+  border-radius: theme('borderRadius.lg');
+  overflow-x: auto;
+  margin: theme('spacing.6') 0;
+}
+
+.prose code {
+  background-color: theme('colors.gray.100');
+  padding: theme('spacing.1') theme('spacing.2');
+  border-radius: theme('borderRadius.md');
+  font-family: theme('fontFamily.mono');
+  font-size: theme('fontSize.sm');
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
