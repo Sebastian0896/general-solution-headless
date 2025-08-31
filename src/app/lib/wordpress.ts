@@ -31,7 +31,7 @@ export interface WPPost {
   sticky: boolean;
   template: string;
   format: string;
-  meta: any[];
+  meta: string[];
   categories: number[];
   tags: number[];
   _embedded?: {
@@ -82,10 +82,10 @@ export interface WPPost {
             source_url: string;
           };
         };
-        image_meta: any;
+        image_meta: string;
       };
       source_url: string;
-      _links: any;
+      _links: string;
     }>;
   };
 }
@@ -99,7 +99,7 @@ export interface WPCategory {
   slug: string;
   taxonomy: string;
   parent: number;
-  meta: any[];
+  meta: string[];
 }
 
 // Función para obtener posts con paginación
