@@ -74,7 +74,7 @@ export async function generateStaticParams() {
 async function getService(slug: string): Promise<Service | null> {
   try {
     const response = await fetch(
-      `${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?slug=${slug}`,
+      `${process.env.NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/cpt-services?slug=${slug}`,
       { next: { revalidate: 60 } } // Revalidar cada minuto
     );
     
@@ -94,7 +94,7 @@ async function getService(slug: string): Promise<Service | null> {
 async function getRelatedServices(currentServiceId: number): Promise<Service[]> {
   try {
     const response = await fetch(
-      `${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?per_page=3&exclude=${currentServiceId}`,
+      `${process.env.NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/cpt-services?per_page=3&exclude=${currentServiceId}`,
       { next: { revalidate: 60 } } // Revalidar cada minuto
     );
     
