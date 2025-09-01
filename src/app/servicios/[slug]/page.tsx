@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Obtener todos los slugs para generar rutas estáticas
 export async function generateStaticParams() {
   try {
-    const response = await fetch(`${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?per_page=100`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/cpt-services?per_page=100`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch services');
