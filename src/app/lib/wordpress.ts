@@ -1,7 +1,7 @@
 // lib/wordpress.ts
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL;
+const NEXT_PUBLIC_WP_API_URL_CLIENT = process.env.NEXT_PUBLIC_WP_API_URL_CLIENT;
 
-if (!WORDPRESS_API_URL) {
+if (!NEXT_PUBLIC_WP_API_URL_CLIENT) {
   throw new Error('WORDPRESS_API_URL is not defined in environment variables');
 }
 
@@ -106,7 +106,7 @@ export interface WPCategory {
 export async function getPosts(page = 1, perPage = 10): Promise<WPPost[]> {
   try {
     const response = await fetch(
-      `${WORDPRESS_API_URL}/wp/v2/posts?page=${page}&per_page=${perPage}&_embed`,
+      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/posts?page=${page}&per_page=${perPage}&_embed`,
       {
         next: { revalidate: 60 }, // Revalidar cada minuto
       }
@@ -128,7 +128,7 @@ export async function getPosts(page = 1, perPage = 10): Promise<WPPost[]> {
 export async function getPost(slug: string): Promise<WPPost | null> {
   try {
     const response = await fetch(
-      `${WORDPRESS_API_URL}/wp/v2/posts?slug=${slug}&_embed`,
+      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/posts?slug=${slug}&_embed`,
       {
         next: { revalidate: 60 }, // Revalidar cada minuto
       }
@@ -150,7 +150,7 @@ export async function getPost(slug: string): Promise<WPPost | null> {
 export async function getCategories(): Promise<WPCategory[]> {
   try {
     const response = await fetch(
-      `${WORDPRESS_API_URL}/wp/v2/categories?per_page=100`,
+      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/categories?per_page=100`,
       {
         next: { revalidate: 3600 }, // Revalidar cada hora
       }
@@ -172,7 +172,7 @@ export async function getCategories(): Promise<WPCategory[]> {
 export async function getPostsByCategory(categoryId: number, page = 1, perPage = 10): Promise<WPPost[]> {
   try {
     const response = await fetch(
-      `${WORDPRESS_API_URL}/wp/v2/posts?categories=${categoryId}&page=${page}&per_page=${perPage}&_embed`,
+      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/posts?categories=${categoryId}&page=${page}&per_page=${perPage}&_embed`,
       {
         next: { revalidate: 60 }, // Revalidar cada minuto
       }
@@ -194,7 +194,7 @@ export async function getPostsByCategory(categoryId: number, page = 1, perPage =
 export async function getSiteInfo() {
   try {
     const response = await fetch(
-      `${WORDPRESS_API_URL}/`,
+      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/`,
       {
         next: { revalidate: 3600 }, // Revalidar cada hora
       }
