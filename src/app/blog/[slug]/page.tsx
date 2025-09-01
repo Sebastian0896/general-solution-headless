@@ -7,13 +7,14 @@ import { notFound } from 'next/navigation';
 import { getPost, getPosts, WPPost } from '../../lib/wordpress';
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   
   if (!post) {
     return {
@@ -48,7 +49,8 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPost({ params }: Props) {
-  const post = await getPost(params.slug);
+  const { slug } = await params;
+  const post = await getPost(slug);
   
   if (!post) {
     notFound();
