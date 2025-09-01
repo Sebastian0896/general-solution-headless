@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // Obtener todos los slugs para generar rutas estáticas
 export async function generateStaticParams() {
   try {
-    const response = await fetch('http://localhost/web-general-headless/wp-json/wp/v2/cpt-services?per_page=100');
+    const response = await fetch(`${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?per_page=100`);
     
     if (!response.ok) {
       throw new Error('Failed to fetch services');
@@ -74,7 +74,7 @@ export async function generateStaticParams() {
 async function getService(slug: string): Promise<Service | null> {
   try {
     const response = await fetch(
-      `http://localhost/web-general-headless/wp-json/wp/v2/cpt-services?slug=${slug}`,
+      `${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?slug=${slug}`,
       { next: { revalidate: 60 } } // Revalidar cada minuto
     );
     
@@ -94,7 +94,7 @@ async function getService(slug: string): Promise<Service | null> {
 async function getRelatedServices(currentServiceId: number): Promise<Service[]> {
   try {
     const response = await fetch(
-      `http://localhost/web-general-headless/wp-json/wp/v2/cpt-services?per_page=3&exclude=${currentServiceId}`,
+      `${process.env.WORDPRESS_API_URL}/wp/v2/cpt-services?per_page=3&exclude=${currentServiceId}`,
       { next: { revalidate: 60 } } // Revalidar cada minuto
     );
     
