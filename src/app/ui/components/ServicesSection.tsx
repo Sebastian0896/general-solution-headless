@@ -29,7 +29,7 @@ const ServicesSection: React.FC = () => {
     const fetchServices = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/cpt-services`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/cpt-services`);
         
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
