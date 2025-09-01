@@ -3,18 +3,20 @@ import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getPosts, getCategories, WPPost, WPCategory } from '../lib/wordpress';
+import Pagination from '../ui/components/Paginacion';
 
 export const metadata: Metadata = {
   title: 'Blog - Nombre Empresa',
   description: 'Artículos sobre desarrollo web, diseño y marketing digital',
 };
 
-export default async function Blog() {
+export default async function Blog({ searchParams }: { searchParams?: { page?: string } }) {
   const [posts, categories] = await Promise.all([
-    getPosts(1, 10),
+    getPosts(1, 4),
     getCategories()
   ]);
-
+  const page =  Number(searchParams?.page) || 1;
+  //console.log(posts)
   // Función para obtener la URL de la imagen destacada
   const getFeaturedImage = (post: WPPost) => {
     if (post._embedded?.['wp:featuredmedia']?.[0]) {
@@ -51,7 +53,7 @@ export default async function Blog() {
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="lg:w-2/3">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {posts.map((post) => (
+              {posts.posts.map((post) => (
                 <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="relative w-full">
                     {/* <Image
@@ -91,7 +93,10 @@ export default async function Blog() {
             </div>
 
             {/* Paginación */}
-            <div className="mt-12 flex justify-center">
+            { posts.totalPages > 1 && (
+              <Pagination currentPage={page} totalPages={posts.totalPages}/>
+            )}
+            {/* <div className="mt-12 flex justify-center">
               <nav className="flex items-center space-x-2">
                 <button className="px-4 py-2 text-gray-500 bg-gray-100 rounded-md hover:bg-blue-100 hover:text-blue-600">
                   Anterior
@@ -103,7 +108,7 @@ export default async function Blog() {
                   Siguiente
                 </button>
               </nav>
-            </div>
+            </div> */}
           </div>
 
           <div className="lg:w-1/3">
@@ -143,7 +148,7 @@ export default async function Blog() {
             <div className="bg-white rounded-xl shadow-md p-6">
               <h3 className="text-xl font-semibold mb-4">Artículos recientes</h3>
               <ul className="space-y-4">
-                {posts.slice(0, 3).map((post) => (
+                {posts.posts.slice(0, 3).map((post) => (
                   <li key={post.id} className="flex items-start">
                     <div className="flex-shrink-0 w-16 h-16 relative mr-4">
                       {/* <Image

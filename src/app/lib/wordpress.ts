@@ -103,10 +103,13 @@ export interface WPCategory {
 }
 
 // Función para obtener posts con paginación
-export async function getPosts(page = 1, perPage = 10): Promise<WPPost[]> {
+export async function getPosts(
+  page = 1,
+  perPage = 10
+): Promise<{ posts: WPPost[]; total: number; totalPages: number }> {
   try {
     const response = await fetch(
-      `${NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/posts?page=${page}&per_page=${perPage}&_embed`,
+      `${process.env.NEXT_PUBLIC_WP_API_URL_CLIENT}/wp/v2/posts?page=${page}&per_page=${perPage}&_embed`,
       {
         next: { revalidate: 60 }, // Revalidar cada minuto
       }
@@ -117,12 +120,18 @@ export async function getPosts(page = 1, perPage = 10): Promise<WPPost[]> {
     }
 
     const posts: WPPost[] = await response.json();
-    return posts;
+
+    // Extraer metadata de la respuesta
+    const total = Number(response.headers.get("X-WP-Total")) || 0;
+    const totalPages = Number(response.headers.get("X-WP-TotalPages")) || 0;
+
+    return { posts, total, totalPages };
   } catch (error) {
-    console.error('Error fetching posts:', error);
-    return [];
+    console.error("Error fetching posts:", error);
+    return { posts: [], total: 0, totalPages: 0 };
   }
 }
+
 
 // Función para obtener un post específico por slug
 export async function getPost(slug: string): Promise<WPPost | null> {
