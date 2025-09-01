@@ -10,13 +10,13 @@ export const metadata: Metadata = {
   description: 'Artículos sobre desarrollo web, diseño y marketing digital',
 };
 
-export default async function Blog({ searchParams }: { searchParams?: { page?: string } }) {
+export default async function Blog(props: { searchParams?: Promise<{ page?: string }> }) {
+  const searchParams = await props.searchParams;
+  const page =  Number(searchParams?.page) || 1;
   const [posts, categories] = await Promise.all([
-    getPosts(1, 4),
+    getPosts(page, 4),
     getCategories()
   ]);
-  const page =  Number(searchParams?.page) || 1;
-  //console.log(posts)
   // Función para obtener la URL de la imagen destacada
   const getFeaturedImage = (post: WPPost) => {
     if (post._embedded?.['wp:featuredmedia']?.[0]) {
