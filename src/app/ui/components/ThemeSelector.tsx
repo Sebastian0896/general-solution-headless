@@ -27,7 +27,7 @@ const ThemeSelector: React.FC = () => {
           {themes.map((t) => (
             <button
               key={t.id}
-              onClick={() => setTheme(t.id as any)}
+              onClick={() => setTheme(t.id as 'green')}
               className={`w-8 h-8 rounded-full ${t.color} border-2 ${
                 theme === t.id ? 'border-white ring-2 ring-gray-400' : 'border-gray-200'
               }`}

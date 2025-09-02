@@ -1,6 +1,7 @@
 // app/blog/[slug]/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPost, getPosts, getSiteInfo } from '../../lib/wordpress';
@@ -101,13 +102,13 @@ export default async function BlogPost({ params }: Props) {
           {author && (
             <div className="flex items-center mr-6 mb-2">
               <div className="relative w-8 h-8 rounded-full overflow-hidden mr-2">
-                {/* <Image
+                <Image
                   src={author.avatar_urls['96'] || '/avatar-placeholder.png'}
                   alt={author.name}
                   fill
                   className="object-cover"
-                /> */}
-                <img src={author.avatar_urls['96']} alt={author.name} className='object-cover' />
+                />
+                {/* <img src={author.avatar_urls['96']} alt={author.name} className='object-cover' /> */}
               </div>
               <span>{author.name}</span>
             </div>
@@ -134,14 +135,14 @@ export default async function BlogPost({ params }: Props) {
 
         {featuredImage && (
           <div className="relative h-96 w-full rounded-xl overflow-hidden mb-6">
-           {/*  <Image
+            <Image
               src={featuredImage.source_url}
               alt={featuredImage.alt_text || post.title.rendered}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-            /> */}
-            <img src={featuredImage.source_url} alt={featuredImage.alt_text} className='object-cover' />
+            />
+            {/* <img src={featuredImage.source_url} alt={featuredImage.alt_text} className='object-cover' /> */}
           </div>
         )}
       </header>
@@ -157,13 +158,13 @@ export default async function BlogPost({ params }: Props) {
         <div className="bg-gray-50 rounded-xl p-6 mb-12">
           <div className="flex items-center mb-4">
             <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4">
-              {/* <Image
+              <Image
                 src={author.avatar_urls['96'] || '/avatar-placeholder.png'}
                 alt={author.name}
                 fill
                 className="object-cover"
-              /> */}
-              <img src={author.avatar_urls['96']} alt={author.name} className='object-cover' />
+              />
+              {/* <img src={author.avatar_urls['96']} alt={author.name} className='object-cover' /> */}
             </div>
             <div>
               <h3 className="text-xl font-semibold">{author.name}</h3>
