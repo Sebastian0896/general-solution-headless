@@ -4,13 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPost, getPosts, WPPost } from '../../lib/wordpress';
+import { getPost, getPosts, getSiteInfo } from '../../lib/wordpress';
 
-interface Props {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+import { Props } from '@/app/interfaces/singlePost';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -24,9 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   // Obtener imagen destacada para OpenGraph
   const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url;
-  
+  const siteInfo = await getSiteInfo();
   return {
-    title: `${post.title.rendered} - Blog | Nombre Empresa`,
+    title: `${post.title.rendered} - Blog | ${siteInfo.name}`,
     description: post.excerpt.rendered.replace(/<[^>]*>/g, '').substring(0, 160),
     openGraph: {
       title: post.title.rendered,

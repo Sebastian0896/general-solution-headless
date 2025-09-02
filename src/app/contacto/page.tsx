@@ -1,8 +1,7 @@
-// pages/contacto.tsx
-'use client'
+// app/contacto/page.tsx
+'use client';
 
 import React, { useState } from 'react';
-
 
 const Contacto: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +11,8 @@ const Contacto: React.FC = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -21,18 +22,40 @@ const Contacto: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
-    alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+    
+    try {
+      // Enviar formulario a FormSubmit o directamente por mailto
+      // Alternativa: usar FormSubmit (https://formsubmit.co/) para enviar a Gmail
+      const form = e.target as HTMLFormElement;
+      
+      // Opción 1: Usar FormSubmit (recomendado)
+      form.action = 'https://formsubmit.co/sgrx245@gmail.com';
+      form.method = 'POST';
+      
+      // Agregar campos ocultos para configuración
+      const redirectInput = document.createElement('input');
+      redirectInput.type = 'hidden';
+      redirectInput.name = '_next';
+      redirectInput.value = window.location.origin + '/contacto/gracias';
+      form.appendChild(redirectInput);
+      
+      const subjectInput = document.createElement('input');
+      subjectInput.type = 'hidden';
+      subjectInput.name = '_subject';
+      subjectInput.value = `Nuevo mensaje de contacto: ${formData.subject}`;
+      form.appendChild(subjectInput);
+      
+      // Enviar formulario
+      form.submit();
+      
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      setSubmitStatus('error');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -63,7 +86,7 @@ const Contacto: React.FC = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                       />
                     </div>
                     <div>
@@ -77,7 +100,7 @@ const Contacto: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                       />
                     </div>
                   </div>
@@ -93,7 +116,7 @@ const Contacto: React.FC = () => {
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                       />
                     </div>
                     <div>
@@ -106,7 +129,7 @@ const Contacto: React.FC = () => {
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                       >
                         <option value="">Selecciona un asunto</option>
                         <option value="consultation">Consulta</option>
@@ -128,24 +151,46 @@ const Contacto: React.FC = () => {
                       value={formData.message}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
                     ></textarea>
                   </div>
 
                   <div>
                     <button
                       type="submit"
-                      className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium"
+                      disabled={isSubmitting}
+                      className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Enviar mensaje
+                      {isSubmitting ? 'Enviando...' : 'Enviar mensaje'}
                     </button>
                   </div>
+
                 </form>
               </div>
             </div>
 
             <div className="lg:w-1/2">
-              <div className="bg-white rounded-xl shadow-md p-8 mb-8">
+              {/* Mapa de ubicación */}
+              <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 className="text-2xl font-semibold mb-4">Nuestra ubicación</h2>
+                <div className="rounded-lg overflow-hidden h-80">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2467.229997875298!2d2.1674030251520073!3d41.38676064603542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sEdificio%20El%20Triangle%2C%20Plaza%20de%20Catalu%C3%B1a%201%2C%204%20piso.%20Eixample%2008002%2C%20Barcelona.%20Espa%C3%B1a.!5e1!3m2!1sen!2sdo!4v1756823499219!5m2!1sen!2sdo"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación de nuestra empresa"
+                  ></iframe>
+                </div>
+                <p className="text-sm text-gray-600 mt-4">
+                  Puedes visitarnos en nuestra oficina principal en el corazón de la ciudad.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-md p-6 mb-8">
                 <h2 className="text-2xl font-semibold mb-6">Información de contacto</h2>
                 <div className="space-y-4">
                   <div className="flex items-start">

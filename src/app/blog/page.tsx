@@ -2,11 +2,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { getPosts, getCategories, WPPost, WPCategory } from '../lib/wordpress';
 import Pagination from '../ui/components/Paginacion';
+import { getPosts, getCategories, getSiteInfo } from '../lib/wordpress';
+import { WPPost } from '../interfaces/wordpressApi';
 
+const siteInfo = await getSiteInfo();
 export const metadata: Metadata = {
-  title: 'Blog - Nombre Empresa',
+  title: `Blog - ${siteInfo.name}`,
   description: 'Artículos sobre desarrollo web, diseño y marketing digital',
 };
 
@@ -24,7 +26,6 @@ export default async function Blog(props: { searchParams?: Promise<{ page?: stri
     }
     return '/placeholder-blog.jpg';
   };
-
   // Función para obtener el texto del excerpt sin HTML
   const getExcerpt = (post: WPPost) => {
     const excerpt = post.excerpt.rendered;

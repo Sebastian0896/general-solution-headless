@@ -1,14 +1,18 @@
 // app/layout.tsx
 import './ui/globals.css';
 import { Inter } from 'next/font/google';
+import { ThemeProvider } from '../context/ThemeContext';
 import Header from './ui/components/Header';
 import Navigation from './ui/components/Navigation';
 import Footer from './ui/components/Footer';
+import ThemeSelector from './ui/components/ThemeSelector';
+import { getSiteInfo } from './lib/wordpress';
+
 
 const inter = Inter({ subsets: ['latin'] });
-
+const siteInfo = await getSiteInfo();
 export const metadata = {
-  title: 'Nombre Empresa - Soluciones Web Modernas',
+  title: `${siteInfo.name}`,
   description: 'Ofrecemos soluciones web modernas con WordPress headless y Next.js',
 };
 
@@ -20,12 +24,19 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className} suppressHydrationWarning>
-        <Header />
-        <Navigation />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <div className="container mx-auto px-4 py-2">
+              <ThemeSelector />
+            </div>
+            <Navigation />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Footer info={siteInfo}/>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

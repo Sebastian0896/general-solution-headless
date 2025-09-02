@@ -4,15 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-interface MenuItem {
-  ID: number;
-  title: string;
-  url: string;
-  object_slug: string;
-  classes?: string[];
-  menu_item_parent?: string;
-}
+import { MenuItem } from '@/app/interfaces/menuItem';
 
 const Navigation: React.FC = () => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -93,89 +85,26 @@ const Navigation: React.FC = () => {
   }
 
   return (
-    <nav className="bg-gray-100 border-t border-b border-gray-200 relative">
-      <div className="container mx-auto px-4">
-        {/* Menú para desktop */}
-        <div className="hidden md:block">
-          <ul className="flex space-x-8 py-3">
-            {menuItems.map((item) => {
-              const normalizedUrl = normalizeUrl(item.url);
-              const isActive = pathname === normalizedUrl;
-              
-              return (
-                <li key={item.ID}>
-                  <Link 
-                    href={normalizedUrl} 
-                    className={`font-medium transition-colors relative py-2 ${
-                      isActive 
-                        ? 'text-blue-600 font-semibold' 
-                        : 'text-gray-700 hover:text-blue-600'
-                    }`}
-                  >
-                    {item.title}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></span>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        {/* Menú para móvil */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="flex items-center justify-between w-full py-3 text-gray-700 focus:outline-none"
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-          >
-            <span>Menú</span>
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+    <nav className="bg-bg-secondary  border-border">
+    <div className="container mx-auto px-4">
+      <ul className="flex space-x-8 py-3">
+        {menuItems.map((item) => (
+          <li key={item.ID}>
+            <Link 
+              href={item.url} 
+              className={`font-medium transition-colors ${
+                pathname === item.url 
+                  ? 'text-primary-600' 
+                  : 'text-text-secondary hover:text-primary-600'
+              }`}
             >
-              {isMobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-
-          {/* Menú desplegable para móvil */}
-          {isMobileMenuOpen && (
-            <div className="absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-10">
-              <ul className="py-2">
-                {menuItems.map((item) => {
-                  const normalizedUrl = normalizeUrl(item.url);
-                  const isActive = pathname === normalizedUrl;
-                  
-                  return (
-                    <li key={item.ID}>
-                      <Link 
-                        href={normalizedUrl} 
-                        className={`block px-4 py-3 transition-colors ${
-                          isActive 
-                            ? 'bg-blue-50 text-blue-600 font-semibold border-l-4 border-blue-600' 
-                            : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
-                        }`}
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-    </nav>
+              {item.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
   );
 };
 

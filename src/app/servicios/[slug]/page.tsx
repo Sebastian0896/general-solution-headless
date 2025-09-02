@@ -5,33 +5,10 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-interface Service {
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-  content: {
-    rendered: string;
-  };
-  acf: {
-    description: string;
-    icon: string;
-    featured: boolean;
-    full_description?: string;
-    gallery?: string[];
-    price?: string;
-    duration?: string;
-    features?: string[];
-  };
-}
+import { Service, Props } from '@/app/interfaces/singleService';
+import { getSiteInfo } from '@/app/lib/wordpress';
 
-interface Props {
-  params: Promise<{
-    slug: string;
-  }>;
-}
-
+const siteInfo = await getSiteInfo();
 // Generar metadata dinámica
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Esperar a que los params se resuelvan
@@ -45,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   
   return {
-    title: `${service.title.rendered} - Servicios | Nombre Empresa`,
+    title: `${service.title.rendered} - Servicios | ${siteInfo.name}`,
     description: service.acf.description,
   };
 }

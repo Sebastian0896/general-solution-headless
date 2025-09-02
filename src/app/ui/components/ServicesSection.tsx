@@ -4,21 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 
-interface Service {
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-  content: {
-    rendered: string;
-  };
-  acf: {
-    description: string;
-    icon: string;
-    featured: boolean;
-  };
-}
+import { Service } from '@/app/interfaces/cptService';
 
 const ServicesSection: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -39,7 +25,7 @@ const ServicesSection: React.FC = () => {
         setServices(data);
     } catch (err) {
         setError(err instanceof Error ? err.message : 'Error desconocido');
-        console.error('Error fetching services:', err);
+        console.error('Error fetching services:', error);
     } finally {
         setIsLoading(false);
     }

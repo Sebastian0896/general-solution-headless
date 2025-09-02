@@ -2,133 +2,113 @@
 @import 'tailwindcss';
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  :root {
+    /* Colores base - Tema Azul (default) */
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-900: #1e3a8a;
+    
+    --color-secondary-500: #f97316;
+    --color-secondary-600: #ea580c;
+    
+    --color-accent-500: #8b5cf6;
+    --color-accent-600: #7c3aed;
+    
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    --color-text-muted: #9ca3af;
+    
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f9fafb;
+    --color-bg-muted: #f3f4f6;
+    
+    --color-border: #e5e7eb;
   }
-  
-  body {
-    @apply text-gray-800 antialiased;
-  }
-}
 
-@layer components {
-  .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200;
+  .theme-green {
+    --color-primary-50: #ecfdf5;
+    --color-primary-100: #d1fae5;
+    --color-primary-500: #10b981;
+    --color-primary-600: #059669;
+    --color-primary-700: #047857;
+    --color-primary-900: #064e3b;
+    
+    --color-secondary-500: #f59e0b;
+    --color-secondary-600: #d97706;
+  }
+
+  .theme-purple {
+    --color-primary-50: #faf5ff;
+    --color-primary-100: #f3e8ff;
+    --color-primary-500: #a855f7;
+    --color-primary-600: #9333ea;
+    --color-primary-700: #7e22ce;
+    --color-primary-900: #581c87;
+    
+    --color-secondary-500: #ec4899;
+    --color-secondary-600: #db2777;
+  }
+
+  .theme-rose {
+    --color-primary-50: #fff1f2;
+    --color-primary-100: #ffe4e6;
+    --color-primary-500: #f43f5e;
+    --color-primary-600: #e11d48;
+    --color-primary-700: #be123c;
+    --color-primary-900: #881337;
+    
+    --color-secondary-500: #f97316;
+    --color-secondary-600: #ea580c;
+  }
+
+  /* Aplicar colores a utilidades de Tailwind */
+  .bg-primary-500 {
+    background-color: var(--color-primary-500);
   }
   
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-md transition-colors duration-200;
+  .bg-primary-600 {
+    background-color: var(--color-primary-600);
   }
   
-  .card {
-    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  .text-primary-500 {
+    color: var(--color-primary-500);
   }
   
-  .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors;
+  .text-primary-600 {
+    color: var(--color-primary-600);
   }
+  
+  .border-primary-500 {
+    border-color: var(--color-primary-500);
+  }
+  
+  .bg-secondary-500 {
+    background-color: var(--color-secondary-500);
+  }
+  
+  /* ... más utilidades según sea necesario */
 }
 
 /* Estilos para el contenido de WordPress */
 .prose {
-  color: theme('colors.gray.700');
-  max-width: none;
+  color: var(--color-text-primary);
 }
 
-.prose h2 {
-  font-size: theme('fontSize.2xl');
-  font-weight: theme('fontWeight.bold');
-  margin-top: theme('spacing.8');
-  margin-bottom: theme('spacing.4');
-  color: theme('colors.gray.900');
-}
-
-.prose h3 {
-  font-size: theme('fontSize.xl');
-  font-weight: theme('fontWeight.semibold');
-  margin-top: theme('spacing.6');
-  margin-bottom: theme('spacing.3');
-  color: theme('colors.gray.900');
-}
-
-.prose p {
-  margin-bottom: theme('spacing.4');
-  line-height: theme('lineHeight.relaxed');
+.prose h2, .prose h3 {
+  color: var(--color-text-primary);
 }
 
 .prose a {
-  color: theme('colors.blue.600');
-  text-decoration: underline;
+  color: var(--color-primary-600);
 }
 
 .prose a:hover {
-  color: theme('colors.blue.800');
-}
-
-.prose ul, .prose ol {
-  margin-bottom: theme('spacing.4');
-  padding-left: theme('spacing.6');
-}
-
-.prose ul {
-  list-style-type: disc;
-}
-
-.prose ol {
-  list-style-type: decimal;
-}
-
-.prose li {
-  margin-bottom: theme('spacing.2');
-}
-
-.prose blockquote {
-  border-left: 4px solid theme('colors.gray.300');
-  padding-left: theme('spacing.4');
-  font-style: italic;
-  color: theme('colors.gray.600');
-  margin: theme('spacing.6') 0;
-}
-
-.prose img {
-  border-radius: theme('borderRadius.lg');
-  margin: theme('spacing.6') 0;
-}
-
-.prose table {
-  width: 100%;
-  margin: theme('spacing.6') 0;
-  border-collapse: collapse;
-}
-
-.prose th, .prose td {
-  padding: theme('spacing.2') theme('spacing.4');
-  border: 1px solid theme('colors.gray.300');
-}
-
-.prose th {
-  background-color: theme('colors.gray.100');
-  font-weight: theme('fontWeight.semibold');
-}
-
-.prose pre {
-  background-color: theme('colors.gray.100');
-  padding: theme('spacing.4');
-  border-radius: theme('borderRadius.lg');
-  overflow-x: auto;
-  margin: theme('spacing.6') 0;
-}
-
-.prose code {
-  background-color: theme('colors.gray.100');
-  padding: theme('spacing.1') theme('spacing.2');
-  border-radius: theme('borderRadius.md');
-  font-family: theme('fontFamily.mono');
-  font-size: theme('fontSize.sm');
-}
-
-.prose pre code {
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
+  color: var(--color-primary-700);
 }

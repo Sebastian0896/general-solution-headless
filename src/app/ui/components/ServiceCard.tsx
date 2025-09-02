@@ -3,23 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface Service {
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-  acf: {
-    description: string;
-    icon: string;
-    featured: boolean;
-  };
-}
-
-interface ServiceCardProps {
-  service: Service;
-  featured?: boolean;
-}
+import { ServiceCardProps } from '@/app/interfaces/cptService';
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, featured = false }) => {
   if (featured) {
