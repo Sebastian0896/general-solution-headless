@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getSiteInfo } from '@/app/lib/wordpress';
+//import { getSiteInfo } from '@/app/lib/wordpress';
 
 //const siteInfo = await getSiteInfo();
 const Header: React.FC = () => {

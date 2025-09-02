@@ -32,7 +32,7 @@ const ServicesSection: React.FC = () => {
 };
 
 fetchServices();
-}, []);
+}, [error]);
 
     if (isLoading) {
     return (
