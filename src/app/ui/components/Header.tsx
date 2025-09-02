@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getSiteInfo } from '@/app/lib/wordpress';
 
-const siteInfo = await getSiteInfo();
+//const siteInfo = await getSiteInfo();
 const Header: React.FC = () => {
   return (
     <header className="bg-bg-primary shadow-md">

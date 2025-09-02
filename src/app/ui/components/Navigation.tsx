@@ -68,6 +68,7 @@ const Navigation: React.FC = () => {
   // Cerrar el menú móvil al cambiar de página
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    
   }, [pathname]);
 
   if (isLoading) {
@@ -77,6 +78,7 @@ const Navigation: React.FC = () => {
           <div className="animate-pulse flex space-x-4">
             <div className="flex-1 space-y-2 py-1">
               <div className="h-4 bg-gray-300 rounded w-1/4"></div>
+              <input type={isMobileMenuOpen ? "hidden" : "hidden"} />
             </div>
           </div>
         </div>

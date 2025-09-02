@@ -12,7 +12,7 @@ const Contacto: React.FC = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  //const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -53,7 +53,7 @@ const Contacto: React.FC = () => {
       
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
-      setSubmitStatus('error');
+      //setSubmitStatus('error');
       setIsSubmitting(false);
     }
   };
