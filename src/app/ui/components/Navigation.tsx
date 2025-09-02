@@ -56,14 +56,14 @@ const Navigation: React.FC = () => {
   }, []);
 
   // Función para normalizar URLs (eliminar el dominio si existe)
-  const normalizeUrl = (url: string): string => {
+  /* const normalizeUrl = (url: string): string => {
     try {
       const parsedUrl = new URL(url);
       return parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
     } catch (e) {
       return url;
     }
-  };
+  }; */
 
   // Cerrar el menú móvil al cambiar de página
   useEffect(() => {
