@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import EnviraGallery from '../ui/components/Gallery';
 import { getSiteInfo } from '../lib/wordpress';
-
+import { EnviraGalleryItem } from '../interfaces/gallery';
 const siteInfo = await getSiteInfo();
 export const metadata: Metadata = {
   title: `Galería - ${siteInfo.name}`,
@@ -50,9 +50,9 @@ export default async function GaleriaPage() {
         <div className="container mx-auto px-8">
           {galleries.length > 0 ? (
             <div className="space-y-16">
-              {galleries.map((gallery: any) => (
+              {galleries.map((gallery: EnviraGalleryItem) => (
                 <div key={gallery.id}>
-                  <h2 className="text-2xl font-bold mb-8">{gallery.title.rendered || gallery.title}</h2>
+                  {/* <h2 className="text-2xl font-bold mb-8">{gallery.title.rendered || gallery.title}</h2> */}
                   <EnviraGallery galleryId={gallery.id} />
                 </div>
               ))}

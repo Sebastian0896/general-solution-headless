@@ -7,40 +7,9 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import { EnviraGalleryResponse, EnviraGalleryProps } from '@/app/interfaces/gallery';
 
-interface EnviraGalleryImage {
-  id: number;
-  src: string;
-  title: string;
-  caption: string;
-  alt: string;
-  link: string;
-  thumb: string;
-}
 
-interface GalleryData {
-  gallery: EnviraGalleryImage[];
-}
-
-interface EnviraGalleryResponse {
-  id: number;
-  title: {
-    rendered: string;
-  };
-  slug: string;
-  gallery_data: GalleryData;
-  config: {
-    columns: number;
-    gallery_theme: string;
-    lightbox_theme: string;
-  };
-}
-
-interface EnviraGalleryProps {
-  galleryId?: number;
-  gallerySlug?: string;
-  columns?: number;
-}
 
 const EnviraGallery: React.FC<EnviraGalleryProps> = ({ 
   galleryId, 
