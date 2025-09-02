@@ -1,6 +1,7 @@
 // app/blog/page.tsx
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import Pagination from '../ui/components/Paginacion';
 import { getPosts, getCategories, getSiteInfo } from '../lib/wordpress';
@@ -57,14 +58,14 @@ export default async function Blog(props: { searchParams?: Promise<{ page?: stri
               {posts.posts.map((post) => (
                 <article key={post.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="relative w-full">
-                    {/* <Image
+                    <Image
                       src={getFeaturedImage(post)}
                       alt={post.title.rendered}
                       fill
                       className="object-cover"
                       unoptimized
-                    /> */}
-                    <img src={getFeaturedImage(post)} alt={post.title.rendered} className='object-cover' />
+                    />
+                    {/* <img src={getFeaturedImage(post)} alt={post.title.rendered} className='object-cover' /> */}
                   </div>
                   <div className="p-6">
                     <div className="text-sm text-gray-500 mb-2">
@@ -152,13 +153,13 @@ export default async function Blog(props: { searchParams?: Promise<{ page?: stri
                 {posts.posts.slice(0, 3).map((post) => (
                   <li key={post.id} className="flex items-start">
                     <div className="flex-shrink-0 w-16 h-16 relative mr-4">
-                      {/* <Image
+                      <Image
                         src={getFeaturedImage(post)}
                         alt={post.title.rendered}
                         fill
                         className="object-cover rounded"
-                      /> */}
-                      <img src={getFeaturedImage(post)} alt={post.title.rendered} className='object-cover rounded' />
+                      />
+                      {/* <img src={getFeaturedImage(post)} alt={post.title.rendered} className='object-cover rounded' /> */}
                     </div>
                     <div>
                       <h4 className="font-medium text-gray-900 hover:text-blue-600 transition-colors">
