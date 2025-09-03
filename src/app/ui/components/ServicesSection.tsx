@@ -65,12 +65,12 @@ fetchServices();
   const regularServices = services.filter(service => !service.acf.featured);
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section className="py-16 bg-gradient-to-br from-gray-200 to-gray-100">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Servicios</h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Ofrecemos soluciones especializadas para impulsar tu negocio en el mundo digital
+            Ofrecemos soluciones especializadas
           </p>
         </div>
 
@@ -87,7 +87,6 @@ fetchServices();
         )}
 
         {/* Todos los servicios */}
-        <h3 className="text-2xl font-semibold text-center mb-8 text-gray-800">Todos Nuestros Servicios</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularServices.map((service) => (
             <ServiceCard key={service.id} service={service} />

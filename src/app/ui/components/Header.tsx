@@ -2,9 +2,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-//import { getSiteInfo } from '@/app/lib/wordpress';
+import { getSiteInfo } from '@/app/lib/wordpress';
 
-//const siteInfo = await getSiteInfo();
+const siteInfo = await getSiteInfo();
 const Header: React.FC = () => {
   return (
     <header className="bg-bg-primary shadow-md">
@@ -12,7 +12,7 @@ const Header: React.FC = () => {
         <Link href="/" className="flex items-center">
           <div className="relative w-32 h-32 mr-3">
             <Image
-              src="/logo-general-solution.png"
+              src={siteInfo.site_icon_url}
               alt="Logo"
               fill
               className="object-cover"
@@ -22,9 +22,9 @@ const Header: React.FC = () => {
         </Link>
         
         <div className="flex items-center space-x-4">
-          <button className="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-md transition-colors">
+          <Link href="/contacto" className="hover:bg-primary-700 text-[#BE9A42] border hover:bg-[#BE9A42] hover:text-white px-4 py-2 rounded-md transition-colors">
             Contacto
-          </button>
+          </Link>
         </div>
       </div>
     </header>

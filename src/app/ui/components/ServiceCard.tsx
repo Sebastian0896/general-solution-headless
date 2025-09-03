@@ -8,6 +8,7 @@ import { ServiceCardProps } from '@/app/interfaces/cptService';
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, featured = false }) => {
   if (featured) {
     return (
+      
       <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105">
         <div className="p-8">
           <div className="flex items-center mb-6">

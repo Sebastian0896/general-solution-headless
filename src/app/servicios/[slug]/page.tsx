@@ -37,7 +37,6 @@ export async function generateStaticParams() {
     }
     
     const services: Service[] = await response.json();
-    
     return services.map((service) => ({
       slug: service.slug,
     }));
@@ -60,6 +59,7 @@ async function getService(slug: string): Promise<Service | null> {
     }
     
     const services: Service[] = await response.json();
+    console.log("Mostrando cpt service: ", services)
     return services.length > 0 ? services[0] : null;
   } catch (error) {
     console.error('Error fetching service:', error);

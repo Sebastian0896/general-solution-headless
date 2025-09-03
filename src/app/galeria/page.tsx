@@ -3,6 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import EnviraGallery from '../ui/components/Gallery';
 import { getSiteInfo } from '../lib/wordpress';
+import HeroSection from '../ui/components/HeroSection';
 //import { EnviraGalleryItem } from '../interfaces/gallery';
 const siteInfo = await getSiteInfo();
 export const metadata: Metadata = {
@@ -36,23 +37,25 @@ export default async function GaleriaPage() {
   return (
     <>
       {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+      {/* <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Galería</h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             Descubre nuestros proyectos y trabajos realizados a lo largo del tiempo
           </p>
         </div>
-      </section>
+      </section> */}
+      <HeroSection pageTitle="Galería de Imágenes" />
 
       {/* Galerías */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gradient-to-r from-gray-200 to-gray-100">
         <div className="container mx-auto px-8">
           {galleries.length > 0 ? (
             <div className="space-y-16">
               {galleries.map((gallery: any) => (
                 <div key={gallery.id}>
-                  <h2 className="text-2xl font-bold mb-8">{gallery.title.rendered || gallery.title}</h2>
+                  <h2 className="text-4xl font-bold mb-8 text-[#BE9A42] ">{gallery.title.rendered || gallery.title}</h2>
+                  <hr className='border border-gray-400 my-8'/>
                   <EnviraGallery galleryId={gallery.id} />
                 </div>
               ))}
@@ -66,15 +69,15 @@ export default async function GaleriaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-blue-600">
+      <section className="py-16 ">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">¿Te gusta lo que ves?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-[#BE9A42] mb-4">¿Te gusta lo que ves?</h2>
+          <p className="text-xl  mb-8 max-w-3xl text-[#BE9A42] mx-auto">
             Contáctanos para hablar sobre tu próximo proyecto y cómo podemos ayudarte
           </p>
           <a
             href="/contacto"
-            className="bg-white text-blue-600 px-8 py-3 rounded-md hover:bg-blue-50 transition-colors font-medium inline-block"
+            className="border text-[#BE9A42] px-8 py-3 rounded-md hover:bg-[#BE9A42] hover:text-white transition-colors font-medium inline-block"
           >
             Contactar ahora
           </a>

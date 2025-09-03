@@ -1,5 +1,5 @@
 // app/layout.tsx
-import './ui/globals.css';
+import './globals.css'; // Ajustado para la ubicación real en Next.js
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '../context/ThemeContext';
 import Header from './ui/components/Header';
@@ -7,8 +7,10 @@ import Navigation from './ui/components/Navigation';
 import Footer from './ui/components/Footer';
 import ThemeSelector from './ui/components/ThemeSelector';
 import { getSiteInfo } from './lib/wordpress';
+import WhatsAppButton from './ui/components/WhatsappButton';
 
-
+import Script from 'next/script';
+import ChatwayDesktop from './ui/components/ChatWay';
 const inter = Inter({ subsets: ['latin'] });
 const siteInfo = await getSiteInfo();
 export const metadata = {
@@ -32,8 +34,10 @@ export default function RootLayout({
             </div>
             <Navigation />
             <main className="flex-grow">
+            <WhatsAppButton phone='50769177402' message='Hola, gracias por contactarnos.'/>
               {children}
             </main>
+            <ChatwayDesktop />
             <Footer />
           </div>
         </ThemeProvider>

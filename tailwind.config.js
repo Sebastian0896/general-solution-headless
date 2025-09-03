@@ -18,9 +18,9 @@ module.exports = {
           900: '#1e3a8a',
         },
       },
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-        display: ['Cal Sans', 'ui-sans-serif', 'system-ui'],
+       fontFamily: {
+        serif: ['Merriweather', 'serif'],
+        sans: ['Inter', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
